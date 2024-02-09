@@ -9,15 +9,31 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
     />
+    <!-- font awesome  -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <!-- css  -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../home/style.css" />
   </head>
   <body>
+    <!-- loading page  -->
+    <div class="loader-page">
+      <div class="loader"></div>
+    </div>
+    <!-- loading end  -->
     <!-- heading  -->
     <nav class="navbar">
       <h3>menu</h3>
       <h2>compassion</h2>
-      <h3 class="cartBtn">cart [<span class="cart-num"></span>]</h3>
+      <h3 class="cartBtn">
+        <i class="fa-solid fa-bag-shopping"></i> [<span class="cart-num"></span
+        >]
+      </h3>
     </nav>
     <!-- side bar cart  -->
     <div>
@@ -39,7 +55,7 @@
               <h4 class="name">product name</h4>
               <div class="edit-num">
                 <div class="product-num">1</div>
-                <h4>remove</h4>
+                <h4 class="remove-product">remove</h4>
               </div>
             </div>
             <div class="price">$25</div>
@@ -56,7 +72,7 @@
               <h4 class="name">product name</h4>
               <div class="edit-num">
                 <div class="product-num">1</div>
-                <h4>remove</h4>
+                <h4 class="remove-product">remove</h4>
               </div>
             </div>
             <div class="price">$25</div>
@@ -98,25 +114,20 @@
         </div>
         <div class="sidebar-bottom">
           <button>checkout</button>
+          <button class="remove-cart">remove all</button>
         </div>
       </div>
     </div>
     <!-- side bar cart ends  -->
     <!-- heading ends  -->
     <main id="main">
-      <!-- loading page  -->
-      <div class="loader-page">
-        <div class="loader"></div>
-      </div>
-      <!-- loading end  -->
-
       <!-- page1  -->
       <div class="page1">
         <!-- hero  -->
         <div class="hero" data-scroll>
           <!-- top part  -->
           <div class="top-hero">
-            <h2>view all</h2>
+            <a href="../shop/shop.html">Shop All</a>
             <span>|</span>
             <h2>collections</h2>
             <span>|</span>

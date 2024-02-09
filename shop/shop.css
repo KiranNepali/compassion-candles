@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+/* font  */
+@font-face {
+  font-family: compassion;
+  src: url(compassion.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body,
+html {
+  width: 100%;
+  height: 100%;
+  background-color: #f4f1e0;
+  font-family: compassion;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-color: #f4f1e0;
+  height: 6rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  color: black;
+}
+
+.navbar a {
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navbar h3 {
+  color: black;
+  font-size: 16px;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.navbar span {
+  color: black;
+  font-size: 16px;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.navbar h2 {
+  font-size: 25px;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+/* hero  */
+.hero {
+  width: 100%;
+  height: calc(100vh - 6rem);
+  background-color: #b0d8e8;
+}
+
+.hero .top-hero {
+  display: flex;
+  justify-content: start;
+  gap: 2rem;
+  padding: 2rem 0;
+  margin-left: 2rem;
+  align-items: center;
+}
+.top-hero h2,
+span,
+a {
+  font-weight: 100;
+  font-size: 1.5vw;
+  font-weight: 100;
+  color: #f4f1e0;
+}
+
+/* middle hero part  */
+.hero .middle-hero {
+  margin: 0 1rem;
+  height: 30rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #b2dbe9;
+  gap: 0.5rem;
+}
+
+.middle-hero .img-box {
+  background-color: white;
+  width: 50rem;
+  height: 28rem;
+  overflow: hidden;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* bottom hero part  */
+.bottom-hero {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  text-align: center;
+  color: #d0713a;
+}
+
+.bottom-hero h1 {
+  width: 100%;
+  font-weight: 100;
+  font-size: 14vw;
+}
+
+/* main shop section   */
+
+.shop {
+  margin: 5rem 0;
+}
+.shop-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.shop-container .shop-card {
+  /* background-color: black; */
+  width: 100%;
+  height: 35vw;
+  overflow: hidden;
+  padding: 1rem;
+  border: 1px solid rgb(172, 172, 172);
+}
+
+.shop-card img {
+  width: 100%;
+  height: 30vw;
+  object-fit: cover;
+  object-position: center;
+}
+
+.shop-card .name {
+  text-transform: capitalize;
+  letter-spacing: -0.5px;
+  font-size: 1.2rem;
+  padding: 1rem 1rem;
+  font-family: "Rubik", sans-serif;
+  color: black;
+  cursor: pointer;
+  font-weight: 300;
+}
+.shop-card .desc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+.shop-card .desc span {
+  font-family: compassion;
+  font-weight: 400;
+  color: black;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+}
+/* footer part  */
+/* Assuming you have other styles defined */
+
+.footer {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #321e1e;
+}
+
+.footer .footer-top {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-top .links {
+  height: 100%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  /* background-color: black; */
+}
+.links div {
+  width: 100%;
+  border-bottom: 1.5px solid #bdb498;
+}
+.links h1 {
+  width: 100%;
+  height: 100%;
+  font-size: 4vw;
+  padding-bottom: 0.4rem;
+  padding-top: 0.6rem;
+  padding-left: 1rem;
+}
+.footer-top .contact {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-left: 1.5px solid #bdb498;
+  /* border-bottom: 1.5px solid #BDB498; */
+}
+.footer-bottom {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-bottom h1 {
+  line-height: none;
+  padding-left: 2rem;
+  padding-bottom: 5rem;
+  letter-spacing: 3vw;
+  font-size: 16vw;
+  font-weight: bolder;
+}

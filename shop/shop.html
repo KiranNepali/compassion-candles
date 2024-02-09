@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compassion Candles</title>
+    <!-- locomotive css  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+    />
+    <!-- css  -->
+    <link rel="stylesheet" href="shop.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <h3>menu</h3>
+      <a href="../home/index.html"><h2>compassion</h2></a>
+      <h3 class="cartBtn">cart [<span class="cart-num"></span>]</h3>
+    </nav>
+
+    <!-- main   -->
+    <main id="main">
+      <!-- page1  -->
+      <div class="page1">
+        <!-- hero  -->
+        <div class="hero">
+          <!-- top part  -->
+          <div class="top-hero">
+            <a>Shop All</a>
+            <span>|</span>
+            <h2>collections</h2>
+            <span>|</span>
+            <h2>our story</h2>
+            <span>|</span>
+            <h2>contact us</h2>
+          </div>
+          <!-- top part ends  -->
+
+          <!-- middle part  -->
+          <div class="middle-hero" data-scroll data-scroll-speed="-0.2">
+            <div class="img-box">
+              <img
+                src="https://plus.unsplash.com/premium_photo-1666632532494-3780d6cae861?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt=""
+              />
+            </div>
+            <div class="img-box">
+              <img
+                src="https://images.unsplash.com/photo-1612293905607-b003de9e54fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNhbmRsZXxlbnwwfHwwfHx8MA%3D%3D"
+                alt=""
+              />
+            </div>
+            <!-- middle part ends  -->
+          </div>
+
+          <!-- bottom part  -->
+          <div class="bottom-hero">
+            <h1>SHOP ALL</h1>
+          </div>
+        </div>
+        <!-- hero ends  -->
+        <div class="shop">
+          <div class="shop-container">
+            <!-- shop card will be rendered  -->
+          </div>
+        </div>
+      </div>
+      <!-- footer  -->
+      <div class="footer">
+        <div class="footer-top">
+          <div class="links">
+            <div><h1>home</h1></div>
+            <div><h1>about us</h1></div>
+            <div><h1>contact us</h1></div>
+            <div><h1>collections</h1></div>
+            <div><h1>shop</h1></div>
+          </div>
+          <div class="contact">contact</div>
+        </div>
+        <div class="footer-bottom">
+          <h1>COMPASSION</h1>
+        </div>
+      </div>
+      <!-- footer ends  -->
+    </main>
+    <!-- main ends  -->
+
+    <!-- locomotive js  -->
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const scroll = new LocomotiveScroll({
+          el: document.querySelector("#main"),
+          smooth: true,
+          multiplier: 1.5,
+          lerp: 0.08,
+        });
+      });
+
+      const products = {
+        shop: [
+          {
+            id: 1,
+            img: "https://images.unsplash.com/photo-1511886277144-49a67943f819?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            name: "Product 1",
+            price: "$10.99",
+          },
+          {
+            id: 2,
+            img: "https://images.unsplash.com/photo-1511886277144-49a67943f819?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            name: "Product 2",
+            price: "$19.99",
+          },
+          {
+            id: 3,
+            img: "https://images.unsplash.com/photo-1511886277144-49a67943f819?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            name: "Product 3",
+            price: "$14.99",
+          },
+          {
+            id: 4,
+            img: "https://images.unsplash.com/photo-1511886277144-49a67943f819?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            name: "Product 4",
+            price: "$24.99",
+          },
+          {
+            id: 5,
+            img: "https://images.unsplash.com/photo-1511886277144-49a67943f819?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            name: "Product 5",
+            price: "$29.99",
+          },
+        ],
+      };
+
+      const shopContainer = document.querySelector(".shop-container");
+      products.shop.forEach((item) => {
+        const card = document.createElement("div");
+        card.classList.add("shop-card");
+        card.innerHTML = `
+          <img src="${item.img}"  />
+          <span class="name">${item.name}</span>
+          <div class="desc">
+              <span>${item.price}</span> <span class="add-cart"> add to cart</span>
+          </div>
+      `;
+        shopContainer.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
