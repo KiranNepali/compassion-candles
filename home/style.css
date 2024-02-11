@@ -309,6 +309,11 @@ a {
   gap: 0.5rem;
 }
 
+.favourites .favourite-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .favourites .favourite-card {
   /* background-color: black; */
   width: 24vw;

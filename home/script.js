@@ -172,3 +172,30 @@ const closeSidebarGSAP = () => {
     duration: 0.8,
   });
 };
+
+// render deature product
+// Import the products array from shop.js
+import products from "../shop/shop.js";
+function favouriteProducts() {
+  let card = "";
+  products.favourite.forEach((item) => {
+    card += `
+    <div class="favourite-card">
+         <a href='../product-detail/product-detail.html?id=${item.id}'><img src="${item.img}" alt=""/></a>  
+          <span class="name">${item.name}</span>
+                <div class="desc">
+                <span>${item.price}</span> <span class="add-cart"> add to cart</span>
+          </div>
+      </div>
+    
+    `;
+  });
+  document.querySelector(".favourite-card-container").innerHTML = card;
+}
+favouriteProducts();
+
+// // render added prodcut in side bar
+
+// products.shop.forEach((item) => {
+//   console.log(item);
+// });
