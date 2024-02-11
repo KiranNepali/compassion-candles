@@ -232,6 +232,7 @@ a {
   height: 5vw;
   width: 100%;
   display: flex;
+  gap: 5rem;
   justify-content: center;
   align-items: center;
 }

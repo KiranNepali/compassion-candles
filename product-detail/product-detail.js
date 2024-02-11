@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 // Import the products array from shop.js
-import products from "../shop/shop.js";
+import products from "../products.js";
 
 // Retrieve the product ID from the URL query parameters
 const urlParams = new URLSearchParams(window.location.search);

@@ -117,6 +117,28 @@ window.addEventListener("DOMContentLoaded", function () {
   loadAnimation.kill();
 });
 
+// render deature product
+// Import the products array from shop.js
+import products from "../products.js";
+function favouriteProducts() {
+  let card = "";
+  products.favourite.forEach((item) => {
+    card += `
+    <div class="favourite-card">
+         <a href='../product-detail/product-detail.html?id=${item.id}'><img src="${item.img}" alt=""/></a>  
+          <span class="name">${item.name}</span>
+                <div class="desc">
+                <span>${item.price}</span> 
+                <span class="add-cart"> add to cart</span>
+          </div>
+      </div>
+    
+    `;
+  });
+  document.querySelector(".favourite-card-container").innerHTML = card;
+}
+favouriteProducts();
+
 // add to cart function
 const cartValue = document.querySelectorAll(".cart-num");
 let cartNum = localStorage.getItem("updateNum")
@@ -127,16 +149,46 @@ cartValue.forEach((element) => {
 });
 
 const addCart = document.querySelectorAll(".add-cart");
-addCart.forEach((element) => {
+addCart.forEach((element, index) => {
   element.addEventListener("click", function () {
+    // increase cart num
     cartNum++;
     cartValue.forEach((item) => {
       item.textContent = cartNum;
     });
+    //get detail of added product
     localStorage.setItem("updateNum", cartNum);
     sidebarCartGsap();
+    const selectedItem = products.favourite[index];
+    renderCartProduct(selectedItem);
   });
 });
+
+function renderCartProduct(item) {
+  const singleProductElement = document.querySelector(".sidebar-mid");
+  let clutter = singleProductElement.innerHTML;
+  const productHTML = `
+  <div class="single-product">
+  <div class="cart-img">
+  <img src="${item.img}" alt="">
+</div>
+<div class="desc">
+  <h4 class="name">${item.name}</h4>
+  <div class="edit-num">
+    <div class="product-num">1</div>
+    <h4 class="remove-product">remove</h4>
+  </div>
+</div>
+<div class="price">${item.price}</div>
+          </div>
+      
+    `;
+
+  clutter += productHTML;
+
+  singleProductElement.innerHTML = clutter;
+}
+
 // remove cart
 const removeCart = document.querySelector(".remove-cart");
 removeCart.addEventListener("click", function () {
@@ -145,6 +197,8 @@ removeCart.addEventListener("click", function () {
     item.textContent = cartNum;
   });
   localStorage.setItem("updateNum", cartNum);
+  const renderedCartProducts = document.querySelector(".sidebar-mid");
+  renderedCartProducts.innerHTML = "";
 });
 
 // open side bar when cart button clicked
@@ -173,29 +227,27 @@ const closeSidebarGSAP = () => {
   });
 };
 
-// render deature product
-// Import the products array from shop.js
-import products from "../shop/shop.js";
-function favouriteProducts() {
-  let card = "";
-  products.favourite.forEach((item) => {
-    card += `
-    <div class="favourite-card">
-         <a href='../product-detail/product-detail.html?id=${item.id}'><img src="${item.img}" alt=""/></a>  
-          <span class="name">${item.name}</span>
-                <div class="desc">
-                <span>${item.price}</span> <span class="add-cart"> add to cart</span>
-          </div>
-      </div>
-    
-    `;
-  });
-  document.querySelector(".favourite-card-container").innerHTML = card;
-}
-favouriteProducts();
+// render added product in cart
 
-// // render added prodcut in side bar
-
-// products.shop.forEach((item) => {
-//   console.log(item);
-// });
+// let clutter = "";
+//   const addCart = document.querySelector(".add-cart");
+//   addCart.addEventListener("click", function () {
+//     const product = products[index];
+//     products.favourite.forEach((item) => {
+//       clutter += `  <div class="cart-img">
+//       <img
+//         src="${item.img}"
+//         alt=""
+//       />
+//     </div>
+//     <div class="desc">
+//       <h4 class="name">${item.name}</h4>
+//       <div class="edit-num">
+//         <div class="product-num">1</div>
+//         <h4 class="remove-product">remove</h4>
+//       </div>
+//     </div>
+//     <div class="price">${item.price}</div>`;
+//     });
+//     document.querySelector(".single-product").innerHTML = clutter;
+//   });
