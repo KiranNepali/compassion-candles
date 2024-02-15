@@ -260,6 +260,7 @@ input {
   align-items: center;
   flex-direction: column;
   padding-bottom: 3rem;
+ gap: 1rem;
   border-bottom: 1px solid gray;
   /* background-color: #321e1e; */
 }

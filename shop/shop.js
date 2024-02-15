@@ -168,8 +168,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // remove all cart item
-const removeCart = document.querySelector(".remove-cart");
+
 function removeAllCart() {
+  const removeCart = document.querySelector(".remove-cart");
   removeCart.addEventListener("click", function () {
     cartNum = 0;
     cartValue.forEach((item) => {
