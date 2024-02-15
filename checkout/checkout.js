@@ -61,21 +61,11 @@ ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
 ScrollTrigger.refresh();
 
-// // loader page
-const loadGsap = () => {
-  gsap.to(".loader-page", {
-    y: "-100vh",
-    duration: 1,
-    delay: 1,
-  });
-};
-window.addEventListener("DOMContentLoaded", function () {
-  const loadAnimation = loadGsap();
-  loadAnimation.kill();
-});
+// loader 
+import loadGsap from "../loader.js";
+loadGsap();
 
 // content animation
-const checkoutLeft = document.querySelector(".checkout-left");
 gsap.from(".checkout-left", {
   x: "-100vh",
   duration: 1.5,
@@ -86,3 +76,12 @@ gsap.from(".checkout-right", {
   duration: 1.5,
   delay: 2,
 });
+
+
+const returnCartBtn =  document.querySelector('.bottom-form a');
+returnCartBtn.addEventListener('click', function() {
+  returnCartBtn.href = "../home/index.html";
+  sidebarCartGsap();
+});
+
+import { sidebarCartGsap } from "../sidebar.js";

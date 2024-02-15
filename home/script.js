@@ -104,21 +104,15 @@ tl.from(".links h1", {
   stagger: 0.2,
 });
 
-// // loader page
-const loadGsap = () => {
-  gsap.to(".loader-page", {
-    y: "-100vh",
-    duration: 1,
-    delay: 1,
-  });
-};
-window.addEventListener("DOMContentLoaded", function () {
-  const loadAnimation = loadGsap();
-  loadAnimation.kill();
-});
 
-// render deature product
-// Import the products array from shop.js
+
+// loader 
+import loadGsap from "../loader.js";
+loadGsap();
+
+
+
+// render feature productss
 import products from "../products.js";
 function favouriteProducts() {
   let card = "";
@@ -139,6 +133,7 @@ function favouriteProducts() {
 }
 favouriteProducts();
 
+
 // add to cart function
 const cartValue = document.querySelectorAll(".cart-num");
 let cartNum = localStorage.getItem("updateNum")
@@ -147,107 +142,90 @@ let cartNum = localStorage.getItem("updateNum")
 cartValue.forEach((element) => {
   element.textContent = cartNum;
 });
-
 const addCart = document.querySelectorAll(".add-cart");
-addCart.forEach((element, index) => {
-  element.addEventListener("click", function () {
-    // increase cart num
-    cartNum++;
-    cartValue.forEach((item) => {
-      item.textContent = cartNum;
+function addToCart() {
+  addCart.forEach((element, index) => {
+    element.addEventListener("click", function () {
+      // increase cart num
+      cartNum++;
+      cartValue.forEach((item) => {
+        item.textContent = cartNum;
+      });
+      //get detail of added product
+      localStorage.setItem("updateNum", cartNum);
+      sidebarCartGsap();
+      const selectedItem = products.favourite[index];
+      renderCartProduct(selectedItem);
     });
-    //get detail of added product
-    localStorage.setItem("updateNum", cartNum);
-    sidebarCartGsap();
-    const selectedItem = products.favourite[index];
-    renderCartProduct(selectedItem);
   });
-});
+}
+addToCart();
 
+
+//render clicked product in cart 
 function renderCartProduct(item) {
   const singleProductElement = document.querySelector(".sidebar-mid");
   let clutter = singleProductElement.innerHTML;
   const productHTML = `
-  <div class="single-product">
-  <div class="cart-img">
-  <img src="${item.img}" alt="">
-</div>
-<div class="desc">
-  <h4 class="name">${item.name}</h4>
-  <div class="edit-num">
-    <div class="product-num">1</div>
-    <h4 class="remove-product">remove</h4>
-  </div>
-</div>
-<div class="price">${item.price}</div>
-          </div>
-      
-    `;
-
+      <div class="single-product">
+      <div class="cart-img">
+      <img src="${item.img}" alt="">
+    </div>
+    <div class="desc">
+      <h4 class="name">${item.name}</h4>
+      <div class="edit-num">
+        <div class="product-num">1</div>
+        <h4 class="remove-single-product">remove</h4>
+      </div>
+    </div>
+    <div class="price">${item.price}</div>
+              </div>
+          
+        `;
   clutter += productHTML;
-
   singleProductElement.innerHTML = clutter;
+   // Save to local storage
+   localStorage.setItem('cartItems', singleProductElement.innerHTML);
 }
 
-// remove cart
-const removeCart = document.querySelector(".remove-cart");
-removeCart.addEventListener("click", function () {
-  cartNum = 0;
-  cartValue.forEach((item) => {
-    item.textContent = cartNum;
-  });
-  localStorage.setItem("updateNum", cartNum);
-  const renderedCartProducts = document.querySelector(".sidebar-mid");
-  renderedCartProducts.innerHTML = "";
+// Check if there are items in local storage and render them on page load
+document.addEventListener('DOMContentLoaded', function() {
+  const singleProductElement = document.querySelector(".sidebar-mid");
+  const savedCartItems = localStorage.getItem('cartItems');
+  if (savedCartItems) {
+    singleProductElement.innerHTML = savedCartItems;
+  } 
 });
 
-// open side bar when cart button clicked
-const cartBtn = document.querySelector(".cartBtn");
-cartBtn.addEventListener("click", function () {
-  sidebarCartGsap();
-});
 
-// animation sidebar cart
-const sidebarCartGsap = () => {
-  gsap.to(".sidebar-cart", {
-    right: "0",
-    duration: 0.8,
+// remove single product 
+function removeSingleProduct() {
+  document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('remove-single-product')) {
+      const product = event.target.closest('.single-product');
+      // remove the clikced prduct 
+      product.remove();
+      //decrease cart num 
+      cartNum--;
+      cartValue.forEach((item) => {
+        item.textContent = cartNum;
+      });
+      localStorage.setItem("updateNum", cartNum);
+    }
+     // Update local storage to remove the clicked product
+     const singleProductElement = document.querySelector(".sidebar-mid");
+     localStorage.setItem('cartItems', singleProductElement.innerHTML);
+
   });
-};
+}
+removeSingleProduct();
 
-// close side bar
-const closeSidebar = document.querySelector(".close-sidebar");
-closeSidebar.addEventListener("click", function () {
-  closeSidebarGSAP();
-});
-const closeSidebarGSAP = () => {
-  gsap.to(".sidebar-cart", {
-    right: "-31vw",
-    duration: 0.8,
-  });
-};
 
-// render added product in cart
 
-// let clutter = "";
-//   const addCart = document.querySelector(".add-cart");
-//   addCart.addEventListener("click", function () {
-//     const product = products[index];
-//     products.favourite.forEach((item) => {
-//       clutter += `  <div class="cart-img">
-//       <img
-//         src="${item.img}"
-//         alt=""
-//       />
-//     </div>
-//     <div class="desc">
-//       <h4 class="name">${item.name}</h4>
-//       <div class="edit-num">
-//         <div class="product-num">1</div>
-//         <h4 class="remove-product">remove</h4>
-//       </div>
-//     </div>
-//     <div class="price">${item.price}</div>`;
-//     });
-//     document.querySelector(".single-product").innerHTML = clutter;
-//   });
+
+
+// Importing for sidecart
+import { sidebarCartGsap,openSidebar, closeSideCart } from '../sidebar.js';
+openSidebar();
+closeSideCart();
+

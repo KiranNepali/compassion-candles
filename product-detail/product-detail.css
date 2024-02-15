@@ -91,6 +91,131 @@ html {
   letter-spacing: 1px;
 }
 
+
+/* cart side bar  */
+.sidebar-cart {
+  background-color: #f4f1e0;
+  border-left: 1px solid #bdb498;
+  position: fixed;
+  top: 0;
+  right: -31vw;
+  z-index: 1000;
+  width: 30vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-cart .sidebar-top {
+  height: 5vw;
+  width: 100%;
+  display: flex;
+  padding: 0 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+.sidebar-top h4 {
+  color: black;
+  font-weight: normal;
+  font-size: 1vw;
+  text-align: end;
+  margin: 3rem 1rem;
+  cursor: pointer;
+}
+
+.sidebar-cart .sidebar-mid {
+  height: 40vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  border-bottom: 1px solid black;
+  /* background-color: gray; */
+}
+.sidebar-mid .single-product {
+  background-color: #f4f1e0;
+  width: 100%;
+  height: 8rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5px;
+  border-bottom: 1.5px solid #bdb498;
+}
+.sidebar-mid .cart-img {
+  overflow: hidden;
+  border-radius: 2px;
+  width: 10rem;
+  height: 7rem;
+}
+.cart-img img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+.sidebar-mid .desc {
+  height: 100%;
+  width: 100%;
+  /* background-color: #204224; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 4rem;
+}
+
+.desc .name {
+  font-weight: normal;
+}
+
+.desc .edit-num {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: start;
+  gap: 3rem;
+  align-items: center;
+}
+.edit-num .product-num {
+  padding: 6px 4rem;
+  border: 1px solid gray;
+}
+.edit-num h4 {
+  font-weight: normal;
+}
+.sidebar-cart .price {
+  width: 6vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-cart .sidebar-bottom {
+  height: 5vw;
+  width: 100%;
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-bottom button {
+  letter-spacing: 2px;
+  font-family: compassion;
+  font-weight: normal;
+  color: white;
+  padding: 15px 60px;
+  border: none;
+  cursor: pointer;
+  background-color: #321e1e;
+}
+
 /* product-detail part  */
 .product-detail-container {
   width: 100%;
