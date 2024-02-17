@@ -90,7 +90,9 @@ const favouriteProduct = products.favourite.find(
 // Update the HTML elements with the product details
 document.querySelector(".product-img").src = favouriteProduct.img;
 document.querySelector(".product-name").innerText = favouriteProduct.name;
-document.querySelector(".product-price").innerText = favouriteProduct.price;
+document.querySelector(".product-price").innerText = `$ ${favouriteProduct.price}`;
+
+
 
 
 // add to cart function
@@ -144,7 +146,7 @@ function renderCartProduct(item) {
         <h4 class="remove-single-product">remove</h4>
       </div>
     </div>
-    <div class="price">${item.price}</div>
+    <div class="price">$ ${item.price}</div>
               </div>
           
         `;

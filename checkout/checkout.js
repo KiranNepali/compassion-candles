@@ -1,4 +1,6 @@
-// locomotive scroll
+// locomotive function 
+function loco(){
+  // locomotive scroll
 gsap.registerPlugin(ScrollTrigger);
 
 // Using Locomotive Scroll from Locomotive https://github.com/locomotivemtl/locomotive-scroll
@@ -60,6 +62,8 @@ ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 
 // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
 ScrollTrigger.refresh();
+}
+loco();
 
 // loader 
 import loadGsap from "../loader.js";
@@ -78,40 +82,35 @@ gsap.from(".checkout-right", {
 });
 
 
+
+
 // render all the cart items 
-// Retrieve the HTML string from local storage
-const htmlString = localStorage.getItem('cartItems');
+// Retrieve cartItems from local storage
+const cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
+console.log(cartProducts);
 
 // Create a temporary container to parse the HTML string
 const tempContainer = document.createElement('div');
-tempContainer.innerHTML = htmlString;
-
-// Extract individual product elements
-const productElements = Array.from(tempContainer.querySelectorAll('.single-product'));
-
-// Now, productElements is an array containing the HTML elements of each product
-  console.log(productElements);
-
-
+tempContainer.innerHTML = cartProducts;
 
 // Create a container to hold the new product HTML
 const newProductContainer = document.querySelector('.order-products');
 
 // Iterate over each product element
-productElements.forEach(productElement => {
+cartProducts.forEach(product => {
     // Extract img source and price text
-    const imgSrc = productElement.querySelector('.cart-img img').src;
-    const price = productElement.querySelector('.price').textContent;
-    const name = productElement.querySelector('.name').textContent;
+    const imgSrc = product.img;
+    const price = product.price;
+    const name = product.name;
 
     // Create new product HTML
     const newProductHTML = `
     <div class="product">
     <div class="img-box">
     <img src="${imgSrc}" alt="">
-</div>
-<span>${name}</span>
-<span class="price">${price}</span>
+    </div>
+    <span class="product-name">${name}</span>
+    <span class="price">$ ${price}</span>
             </div>
         
     `;
@@ -121,26 +120,25 @@ productElements.forEach(productElement => {
 });
 
 
-// Function to calculate the total price
-function calculateTotalPrice(productElements) {
+// Function to calculate total price
+function calculateTotalPrice() {
+
   let totalPrice = 0;
+    // Retrieve cartItems from local storage
+  const cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
 
   // Iterate over each product element
-  productElements.forEach(productElement => {
-      // Extract the price text and convert it to a number
-      const price = parseFloat(productElement.querySelector('.price').textContent);
-
-      // Add the price of the current product to the total price
-      totalPrice += price;
+  cartProducts.forEach(product => {
+      // Extract the price of each product and add it to the total price
+      totalPrice += parseFloat(product.price);
   });
 
   // Set the total price in the total-price element
-  const totalPriceElement = document.querySelector('.total-price');
-  totalPriceElement.textContent = `$${totalPrice}`; // Display total price with 2 decimal places
+  document.querySelector('.total-price').textContent = `$ ${totalPrice.toFixed(2)}`; // Display total price with 2 decimal places
 }
 
-// Call the calculateTotalPrice function with the productElements array
-calculateTotalPrice(productElements);
+// Call the calculateTotalPrice function
+calculateTotalPrice();
 
 
 

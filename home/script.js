@@ -1,4 +1,6 @@
-// locomotive scroll
+// locomotive function 
+function loco(){
+  // locomotive scroll
 gsap.registerPlugin(ScrollTrigger);
 
 // Using Locomotive Scroll from Locomotive https://github.com/locomotivemtl/locomotive-scroll
@@ -60,9 +62,10 @@ ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
 
 // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
 ScrollTrigger.refresh();
+}
+loco();
 
 // GSAP
-
 const tl = gsap.timeline();
 
 tl.from([".navbar h3", ".navbar h2"], {
@@ -105,36 +108,30 @@ tl.from(".links h1", {
 });
 
 
-
-// loader 
+// loader animation 
 import loadGsap from "../loader.js";
 loadGsap();
 
-
-
-// render feature productss
+// render shop products 
 import products from "../products.js";
-function favouriteProducts() {
-  let card = "";
+function renderFavouriteProducts() {
+  const shopContainer = document.querySelector(".favourite-container");
   products.favourite.forEach((item) => {
-    card += `
-    <div class="favourite-card">
-         <a href='../product-detail/product-detail.html?id=${item.id}'><img src="${item.img}" alt=""/></a>  
+    const card = document.createElement("div");
+    card.classList.add("favourite-card");
+    card.innerHTML = `
+          <div class="img-box"><a href="../product-detail/product-detail.html?id=${item.id}"><img src="${item.img}"  /></a></div>
           <span class="name">${item.name}</span>
-                <div class="desc">
-                <span>${item.price}</span> 
-                <span class="add-cart"> add to cart</span>
+          <div class="desc">
+              <span>$ ${item.price}</span> <span class="add-cart"> add to cart</span>
           </div>
-      </div>
-    
-    `;
+      `;
+    shopContainer.appendChild(card);
   });
-  document.querySelector(".favourite-card-container").innerHTML = card;
-}
-favouriteProducts();
+};
+renderFavouriteProducts();
 
-
-// add to cart function
+// render  total cart number 
 const cartValue = document.querySelectorAll(".cart-num");
 let cartNum = localStorage.getItem("updateNum")
   ? parseInt(localStorage.getItem("updateNum"))
@@ -142,100 +139,178 @@ let cartNum = localStorage.getItem("updateNum")
 cartValue.forEach((element) => {
   element.textContent = cartNum;
 });
-const addCart = document.querySelectorAll(".add-cart");
-function addToCart() {
-  addCart.forEach((element, index) => {
-    element.addEventListener("click", function () {
-      // increase cart num
-      cartNum++;
-      cartValue.forEach((item) => {
-        item.textContent = cartNum;
-      });
-      //get detail of added product
-      localStorage.setItem("updateNum", cartNum);
-      sidebarCartGsap();
-      const selectedItem = products.favourite[index];
-      renderCartProduct(selectedItem);
-    });
-  });
-}
-addToCart();
 
 
-//render clicked product in cart 
-function renderCartProduct(item) {
-  const singleProductElement = document.querySelector(".sidebar-mid");
-  let clutter = singleProductElement.innerHTML;
-  const productHTML = `
+// render cart products function 
+function renderCartProducts(){
+    // Retrieve cart products from local storage
+    const cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
+    
+    
+    const sidebarMidContainer = document.querySelector('.sidebar-mid');
+    
+    cartProducts.forEach((product) =>{
+      sidebarMidContainer.innerHTML += `
       <div class="single-product">
-      <div class="cart-img">
-      <img src="${item.img}" alt="">
-    </div>
-    <div class="desc">
-      <h4 class="name">${item.name}</h4>
-      <div class="edit-num">
-        <div class="product-num">1</div>
-        <h4 class="remove-single-product">remove</h4>
-      </div>
-    </div>
-    <div class="price">${item.price}</div>
+              <div class="cart-img">
+                <img src="${product.img}" alt="">
               </div>
+              <div class="desc">
+                <h4 class="name">${product.name}</h4>
+                <div class="edit-num">
+                  <div class="product-num">1</div>
+                  <h4 class="remove-single-product">remove</h4>
+                </div>
+              </div>
+              <div class="price">$ ${product.price}</div>
+      </div>
+      `
+    })
+  }
+  renderCartProducts();
+
+
+  // add to cart function 
+function addToCart(){
+    document.addEventListener('DOMContentLoaded', function(){
+      const addCartBtn = document.querySelectorAll(".add-cart");
+      addCartBtn.forEach((btns) => {
+          btns.addEventListener('click', function(){
+            // increase cart num 
+            const cartValue = document.querySelectorAll(".cart-num");
+            let cartNum = localStorage.getItem("updateNum")
+              ? parseInt(localStorage.getItem("updateNum"))
+              : 0;
+            cartNum += 1;
+            cartValue.forEach((element) => {
+              element.textContent = cartNum;
+            });
+            localStorage.setItem('updateNum', cartNum);
+
+
+            // open sidebar 
+            sidebarCartGsap();
+
+
+            // save clicked product info in variable
+            const card = this.closest(".favourite-card");
+            const img = card.querySelector('img').getAttribute('src');
+            const name = card.querySelector(".name").textContent;
+            // const price = parseFloat(card.querySelector(".desc span").textContent);
+            const priceText = card.querySelector(".desc span").textContent;
+            const price = parseFloat(priceText.replace(/\$/g, ""));
+            
+
+
+            // render product in cart 
+            const sidebarMidContainer = document.querySelector('.sidebar-mid');
+              sidebarMidContainer.innerHTML += `
+              <div class="single-product">
+              <div class="cart-img">
+              <img src="${img}" alt="">
+            </div>
+            <div class="desc">
+              <h4 class="name">${name}</h4>
+              <div class="edit-num">
+                <div class="product-num">1</div>
+                <h4 class="remove-single-product">remove</h4>
+              </div>
+            </div>
+            <div class="price">$ ${price}</div>
+                      </div>
+              `
+
+            
+            // Retrieve cart products from local storage
+            const cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
+            // Add the new product to the cart products array
+            cartProducts.push({img: img, name: name, price: price});
+          // Save the updated cart products array to local storage
+            localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+            console.log(cartProducts);
+            
           
-        `;
-  clutter += productHTML;
-  singleProductElement.innerHTML = clutter;
-   // Save to local storage
-   localStorage.setItem('cartItems', singleProductElement.innerHTML);
-}
-
-// Check if there are items in local storage and render them on page load
-document.addEventListener('DOMContentLoaded', function() {
-  const singleProductElement = document.querySelector(".sidebar-mid");
-  const savedCartItems = localStorage.getItem('cartItems');
-  if (savedCartItems) {
-    singleProductElement.innerHTML = savedCartItems;
-  } 
-});
+          })
+          
+      })
+    })
+  }
+  addToCart();
 
 
-// remove all cart item
-function removeAllCart() {
-  const removeCart = document.querySelector(".remove-cart");
-  removeCart.addEventListener("click", function () {
-    cartNum = 0;
-    cartValue.forEach((item) => {
-      item.textContent = cartNum;
+
+
+// remove single product function 
+function removeSingleProduct(){
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-single-product')) {
+            // increase cart num 
+            const cartValue = document.querySelectorAll(".cart-num");
+            let cartNum = localStorage.getItem("updateNum")
+                ? parseInt(localStorage.getItem("updateNum"))
+                : 0;
+            cartNum -= 1;
+            cartValue.forEach((element) => {
+                element.textContent = cartNum;
+            });
+            localStorage.setItem('updateNum', cartNum);
+
+            // Retrieve cart products from local storage
+            const cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
+
+            // Find the index of the product to remove
+            const productContainer = event.target.closest('.single-product');
+            const index = cartProducts.indexOf(productContainer);
+
+
+            // Remove the product from the array
+            cartProducts.splice(index, 1);
+
+            // remove this container from dom 
+            productContainer.remove();
+
+            //save updated cart products in local storage
+            localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+
+
+            console.log(cartProducts);
+        }
     });
-    localStorage.setItem("updateNum", cartNum);
-    const renderedCartProducts = document.querySelector(".sidebar-mid");
-    renderedCartProducts.innerHTML = "";
-     // Clear cart items from local storage
-     localStorage.removeItem("cartItems");
-  });
+}
+removeSingleProduct();
+
+
+
+// remove all cart products function 
+function removeAllCart(){
+  const removeCartBtn = document.querySelector(".remove-cart");
+  removeCartBtn.addEventListener('click', function(){
+    // Retrieve cart products from local storage
+    let cartProducts = JSON.parse(localStorage.getItem('cartProducts')) || [];
+    
+    //remove array
+    cartProducts = [];
+    localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
+    
+    // remove content in sidebar 
+    const sidebarMidContainer = document.querySelector('.sidebar-mid');
+    sidebarMidContainer.innerHTML = '';
+
+    // make cart num 0
+    const cartValue = document.querySelectorAll(".cart-num");
+    let cartNum = localStorage.getItem("updateNum")
+      ? parseInt(localStorage.getItem("updateNum"))
+      : 0;
+    cartNum = 0;
+    cartValue.forEach((element) => {
+      element.textContent = cartNum;
+    });
+    localStorage.setItem('updateNum', cartNum);
+    console.log(cartProducts);
+})
 }
 removeAllCart();
 
-// remove single product 
-function removeSingleProduct() {
-  document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('remove-single-product')) {
-      const product = event.target.closest('.single-product');
-      // remove the clikced prduct 
-      product.remove();
-      //decrease cart num 
-      cartNum--;
-      cartValue.forEach((item) => {
-        item.textContent = cartNum;
-      });
-      localStorage.setItem("updateNum", cartNum);
-    }
-     // Update local storage to remove the clicked product
-     const singleProductElement = document.querySelector(".sidebar-mid");
-     localStorage.setItem('cartItems', singleProductElement.innerHTML);
-
-  });
-}
-removeSingleProduct();
 
 
 
