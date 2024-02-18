@@ -65,6 +65,38 @@ ScrollTrigger.refresh();
 loco();
 
 
+
+// GSAP
+const tl = gsap.timeline();
+tl.from([".navbar h3", ".navbar h2"], {
+  y: "-6rem",
+  duration: 1,
+  delay: 1.8,
+});
+
+tl.from(".top-hero", {
+  x: -500,
+  opacity: "0",
+  duration: 2,
+});
+
+
+// footer h1 gsap
+tl.from(".footer .links h1", {
+  x: "-100vh",
+  duration: 2,
+  scrollTrigger: {
+    scroller: "#main",
+    trigger: ".shop-container",
+    markers: true,
+    start: "top 40%",
+    end: "top -20%",
+    scrub: 2.5,
+  },
+  stagger: 0.2,
+});
+
+
 // loader animation 
 import loadGsap from "../loader.js";
 loadGsap();

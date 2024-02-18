@@ -109,11 +109,11 @@ tl.from(".links h1", {
 
 
 // loader animation 
-import loadGsap from "../loader.js";
+import loadGsap from "./loader.js";
 loadGsap();
 
 // render shop products 
-import products from "../products.js";
+import products from "./products.js";
 function renderFavouriteProducts() {
   const shopContainer = document.querySelector(".favourite-container");
   products.favourite.forEach((item) => {
@@ -317,7 +317,7 @@ removeAllCart();
 
 
 // Importing for sidecart
-import { sidebarCartGsap,openSidebar, closeSideCart } from '../sidebar.js';
+import { sidebarCartGsap,openSidebar, closeSideCart } from './sidebar.js';
 openSidebar();
 closeSideCart();
 
