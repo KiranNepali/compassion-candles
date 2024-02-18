@@ -43,6 +43,9 @@ function addToCart() {
 }
 
 
+
+
+
 // close side bar
 const closeSidebar = document.querySelector(".close-sidebar");
 const closeSidebarGSAP = () => {
@@ -54,8 +57,20 @@ const closeSidebarGSAP = () => {
 function closeSideCart() {
   closeSidebar.addEventListener("click", function () {
     closeSidebarGSAP();
+    responsiveGSAP();
   });
 }
+
+// responsive gsap function
+function responsiveGSAP() {
+  if (window.matchMedia("(max-width: 600px)").matches) {
+      gsap.to(".sidebar-cart", {
+        right: "-100vw",
+        duration: 0.8,
+      });
+  }
+}
+
 
 
 

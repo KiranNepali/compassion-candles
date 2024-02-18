@@ -150,5 +150,21 @@ returnCartBtn.addEventListener('click', function() {
 
 
 
+const showOrder = document.querySelector('.show-order-summary');
+const orders = document.querySelector('.order-summary-bottom');
+
+showOrder.addEventListener('click', function() {
+  if (orders.style.display === 'flex') {
+    orders.style.animation = 'fadeIn 1s forwards';
+  } else {
+    orders.style.animation = 'fadeIn 1s forwards';
+  }
+  // Toggle display property
+  orders.style.display = orders.style.display === 'flex' ? 'none' : 'flex';
+});
+
+
+
+
 
 import { sidebarCartGsap } from "../sidebar.js";

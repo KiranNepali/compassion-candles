@@ -456,23 +456,25 @@ a {
   width: 100vw;
 }
 
+.bottom-hero {
+  margin-top: 1rem;
+  letter-spacing: 10px;
+}
 
 
-
-
-/* footer part  */
+/* /footer part  */
 .footer {
   overflow: hidden;
-  position: relative;
   width: 100%;
-  min-height: 40vh ;
-  display: block;
+  height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
   color: #321e1e;
 }
 .footer .footer-top {
-  margin-top: 19rem;
-  padding: 0;
-  height: 19rem;
+  height: 18rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -484,7 +486,6 @@ a {
   justify-content: center;
   align-items: start;
   flex-direction: column;
-  /* background-color: black; */
 }
 
 .links div {
@@ -508,14 +509,10 @@ a {
   padding: 0;
 }
 .footer-bottom {
-  /* background-color: #c7c7c7; */
-  font-size: 3rem;
+  font-size: bolder;
+  font-size: 4rem;
   letter-spacing: 1rem;
   width: 100%;
-  position: absolute;
-  left: 50%;
-  padding-top: 20px;
-  transform: translate(-50%, -50%);
 }
 
 
@@ -648,17 +645,19 @@ a {
   cursor: pointer;
   background-color: #321e1e;
 }
+}
 
 
 @media (max-width: 600px) {
 .shop {
-  height: 90vh;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 .shop-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-  
+  grid-template-columns: 1fr 1fr;  
 }
 
 .shop-container .shop-card {
@@ -708,7 +707,5 @@ a {
   color: black;
   padding: 0 1rem;
   font-size: 1rem;
-}
-
 }
 }

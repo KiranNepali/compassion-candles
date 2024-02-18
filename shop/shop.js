@@ -88,7 +88,7 @@ tl.from(".footer .links h1", {
   scrollTrigger: {
     scroller: "#main",
     trigger: ".shop-container",
-    markers: true,
+    // markers: true,
     start: "top 40%",
     end: "top -20%",
     scrub: 2.5,

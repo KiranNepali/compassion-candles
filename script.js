@@ -92,6 +92,20 @@ tl.to(".bottom-hero h1", {
   },
 });
 
+if (window.matchMedia("(max-width: 600px)").matches) {
+  gsap.to(".bottom-hero h1", {
+    x: "-34vw",
+    scrollTrigger: {
+      scroller: "#main",
+      trigger: ".top-hero",
+      start: "top 16%",
+      end: "top top",
+      // markers: true,
+      scrub: 2,
+    },
+  });
+}
+
 // footer h1 gsap
 tl.from(".links h1", {
   x: "-100vh",
